@@ -3,7 +3,7 @@
 #include <iostream>
 #include <queue>
 #include <stack>
-#include "../Grid/grid.h"
+#include "../Grid/Grid.h"
 class Algo{
     public:
         static Grid dfs(const Grid&, Grid::coord, Grid::coord = {0, 0});
