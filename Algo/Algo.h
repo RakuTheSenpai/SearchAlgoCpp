@@ -6,9 +6,9 @@
 #include "../Grid/Grid.h"
 class Algo{
     public:
-        static Grid dfs(const Grid&, Grid::coord, Grid::coord = {0, 0});
-        static Grid bfs(const Grid&, Grid::coord, Grid::coord = {0, 0});
+        static Grid dfs(const Grid&, Grid::Coord, Grid::Coord = {0, 0});
+        static Grid bfs(const Grid&, Grid::Coord, Grid::Coord = {0, 0});
     private:
-        static std::vector<Grid::coord>offset;
+        static std::vector<Grid::Coord>offset;
 };
 #endif

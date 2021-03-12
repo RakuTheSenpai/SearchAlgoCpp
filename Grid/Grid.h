@@ -5,10 +5,10 @@
 #define GRID_H
 class Grid{
     public:
-        struct coord{
+        struct Coord{
             int x;
             int y;
-            bool operator==(const coord &b){
+            bool operator==(const Coord &b){
                 return (this->x == b.x) && (this->y == b.y);
             }
         };
@@ -20,13 +20,13 @@ class Grid{
             GOAL,
             NOT_REACHEABLE  
         };
-        Grid(unsigned size, sf::RenderWindow &w, std::vector<std::vector<sf::RectangleShape>>&grid):_grid(std::vector<std::vector<Status>>(size, std::vector<Status>(size, CAN_CROSS))), window(&w), _box_grid(&grid){}
-        void set_coordinates_to_value(coord, Status);
-        bool checkBoundary(coord);
+        Grid(unsigned size, sf::RenderWindow &w);
+        void set_coordinates_to_value(Grid::Coord, Grid::Status);
+        bool checkBoundary(Grid::Coord);
         void draw();
     private:
-        std::vector<std::vector<Status>>_grid;
+        std::vector<std::vector<Grid::Status>>_grid;
         sf::RenderWindow *window;
-        std::vector<std::vector<sf::RectangleShape>> *_box_grid;
+        std::vector<std::vector<sf::RectangleShape>>_box_grid;
 };
 #endif

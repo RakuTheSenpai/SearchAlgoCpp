@@ -1,5 +1,5 @@
 #include "Algo.h"
-std::vector<Grid::coord> Algo::offset{
+std::vector<Grid::Coord> Algo::offset{
             //Up, down, left, right
             {0, 1},
             {0, -1},
@@ -11,12 +11,12 @@ std::vector<Grid::coord> Algo::offset{
             {1, -1},
             {-1, 1}
 };
-Grid Algo::bfs(const Grid &original, Grid::coord end, Grid::coord start){
+Grid Algo::bfs(const Grid &original, Grid::Coord end, Grid::Coord start){
     Grid _grid = original;
     if(!_grid.checkBoundary(start) || !_grid.checkBoundary(end)){
         std::cerr << "Out Of Bounds" << std::endl;
     }
-    std::queue<Grid::coord>q;
+    std::queue<Grid::Coord>q;
     q.push(start);
     while(!q.empty()){
         auto top = q.front();
@@ -39,12 +39,12 @@ Grid Algo::bfs(const Grid &original, Grid::coord end, Grid::coord start){
     return _grid;
 }
 
-Grid Algo::dfs(const Grid &original, Grid::coord end, Grid::coord start){
+Grid Algo::dfs(const Grid &original, Grid::Coord end, Grid::Coord start){
     Grid _grid = original;
     if(!_grid.checkBoundary(start) || !_grid.checkBoundary(end)){
         std::cerr << "Out Of Bounds" << std::endl;
     }
-    std::stack<Grid::coord>s;
+    std::stack<Grid::Coord>s;
     s.push(start);
     while(!s.empty()){
         auto top = s.top();
