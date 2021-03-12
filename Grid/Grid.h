@@ -13,6 +13,7 @@ class Grid{
             }
         };
         enum Status{
+            START,
             CAN_CROSS,
             BLOCKED,
             VISITED,
@@ -22,12 +23,19 @@ class Grid{
         };
         Grid(unsigned, sf::RenderWindow&);
         void set_coordinates_to_value(Grid::Coord, Grid::Status);
+        Grid::Status get_grid_value(Grid::Coord);
         bool checkBoundary(Grid::Coord);
         void draw();
+        void set_value(Grid::Coord, Grid::Status);
+        Grid::Coord get_start();
+        Grid::Coord get_goal();
     private:
         unsigned size;
         std::vector<std::vector<Grid::Status>>_grid;
         sf::RenderWindow *window;
         std::vector<std::vector<sf::RectangleShape>>_box_grid;
+        Grid::Coord start;
+        Grid::Coord goal;
+        void change_color(Grid::Coord, Grid::Status);
 };
 #endif

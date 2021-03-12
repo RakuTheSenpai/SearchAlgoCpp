@@ -11,58 +11,46 @@ std::vector<Grid::Coord> Algo::offset{
             {1, -1},
             {-1, 1}
 };
-Grid Algo::bfs(const Grid &original, Grid::Coord end, Grid::Coord start){
-    Grid _grid = original;
-    if(!_grid.checkBoundary(start) || !_grid.checkBoundary(end)){
-        std::cerr << "Out Of Bounds" << std::endl;
-    }
+void Algo::bfs(Grid &_grid){
     std::queue<Grid::Coord>q;
-    q.push(start);
+    q.push(_grid.get_start());
     while(!q.empty()){
         auto top = q.front();
         q.pop();
-        _grid.set_coordinates_to_value({top.x, top.y}, Grid::Status::VISITED);
-        if(top == end){
-            _grid.set_coordinates_to_value({top.x, top.y},  Grid::Status::GOAL);
-            return _grid;
+        _grid.set_value(Grid::Coord{top.x, top.y}, Grid::Status::VISITED);
+        if(top == _grid.get_goal()){
+            return;
         }
         for(int i = 0; i < 8; ++i){
             int x = top.x + offset[i].x;
             int y = top.y + offset[i].y;
-            if(_grid.checkBoundary({x, y})){
-                 _grid.set_coordinates_to_value({x, y},  Grid::Status::IN_QUEUE);
+            if(_grid.checkBoundary(Grid::Coord{x, y}) && _grid.get_grid_value(Grid::Coord{x,y})==Grid::Status::CAN_CROSS){
+                 _grid.set_value(Grid::Coord{x, y},  Grid::Status::IN_QUEUE);
                 q.push({x, y});
             }
         }
     }
-    _grid.set_coordinates_to_value({end.x, end.y},  Grid::Status::NOT_REACHEABLE);
-    return _grid;
+    _grid.set_coordinates_to_value(_grid.get_goal(),  Grid::Status::NOT_REACHEABLE);
 }
 
-Grid Algo::dfs(const Grid &original, Grid::Coord end, Grid::Coord start){
-    Grid _grid = original;
-    if(!_grid.checkBoundary(start) || !_grid.checkBoundary(end)){
-        std::cerr << "Out Of Bounds" << std::endl;
-    }
+void Algo::dfs(Grid &_grid){
     std::stack<Grid::Coord>s;
-    s.push(start);
+    s.push(_grid.get_start());
     while(!s.empty()){
         auto top = s.top();
         s.pop();
-        _grid.set_coordinates_to_value({top.x, top.y}, Grid::Status::VISITED);
-        if(top == end){
-            _grid.set_coordinates_to_value({top.x, top.y}, Grid::Status::GOAL);
-            return _grid;
+        _grid.set_value(Grid::Coord{top.x, top.y}, Grid::Status::VISITED);
+        if(top == _grid.get_goal()){
+            return;
         }
         for(int i = 0; i < 8; ++i){
             int x = top.x + offset[i].x;
             int y = top.y + offset[i].y;
-            if(_grid.checkBoundary({x, y})){
-                 _grid.set_coordinates_to_value({x, y}, Grid::Status::IN_QUEUE);
+            if(_grid.checkBoundary({x, y}) && _grid.get_grid_value(Grid::Coord{x,y})==Grid::Status::CAN_CROSS){
+                 _grid.set_value(Grid::Coord{x, y}, Grid::Status::IN_QUEUE);
                 s.push({x, y});
             }
         }
     }
-    _grid.set_coordinates_to_value({end.x, end.y}, Grid::Status::NOT_REACHEABLE);
-    return _grid;
+     _grid.set_coordinates_to_value(_grid.get_goal(),  Grid::Status::NOT_REACHEABLE);
 }
