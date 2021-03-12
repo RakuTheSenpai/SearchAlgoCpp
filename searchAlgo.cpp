@@ -3,8 +3,7 @@
 #include "Grid/Grid.h"
 int main(){
     sf::RenderWindow window(sf::VideoMode(800, 600), "Search Algorithm");
-    int N = 20;
-    Grid grid(N, window);
+    Grid grid(20, window);
     while(window.isOpen()){
         sf::Event event;
         while(window.pollEvent(event)){
@@ -15,10 +14,7 @@ int main(){
                     break;
                 case sf::Event::MouseButtonPressed:
                     sf::Vector2i position = sf::Mouse::getPosition(window);
-                    int X = window.getSize().x/N;
-                    int Y = window.getSize().y/N;
-                    Grid::Coord coords{position.x/X, position.y/Y};
-                    grid.set_coordinates_to_value(coords,Grid::Status::BLOCKED);
+                    grid.set_coordinates_to_value(Grid::Coord{position.x, position.y},Grid::Status::BLOCKED);
                     break; 
             }
         }

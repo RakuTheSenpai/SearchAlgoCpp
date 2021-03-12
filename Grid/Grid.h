@@ -20,11 +20,12 @@ class Grid{
             GOAL,
             NOT_REACHEABLE  
         };
-        Grid(unsigned size, sf::RenderWindow &w);
+        Grid(unsigned, sf::RenderWindow&);
         void set_coordinates_to_value(Grid::Coord, Grid::Status);
         bool checkBoundary(Grid::Coord);
         void draw();
     private:
+        unsigned size;
         std::vector<std::vector<Grid::Status>>_grid;
         sf::RenderWindow *window;
         std::vector<std::vector<sf::RectangleShape>>_box_grid;

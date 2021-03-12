@@ -8,8 +8,11 @@ bool Grid::checkBoundary(Grid::Coord current){
 
 void Grid::set_coordinates_to_value(Grid::Coord coordinates, Grid::Status value){
     int x = coordinates.x, y = coordinates.y;
-    if(value == Grid::Status::BLOCKED)_box_grid[y][x].setFillColor(sf::Color::Black);
-    _grid[x][y] = value;
+    int X = window->getSize().x/size;
+    int Y = window->getSize().y/size;
+    Grid::Coord coords{x/X, y/Y};
+    if(value == Grid::Status::BLOCKED)_box_grid[coords.y][coords.x].setFillColor(sf::Color::Black);
+    _grid[coords.x][coords.y] = value;
 }
 
 void Grid::draw(){
@@ -20,7 +23,7 @@ void Grid::draw(){
     }
 }
 
-Grid::Grid(unsigned size, sf::RenderWindow &w):_grid(std::vector<std::vector<Grid::Status>>(size, std::vector<Grid::Status>(size, CAN_CROSS))), window(&w){
+Grid::Grid(unsigned s, sf::RenderWindow &w):size{s},_grid(std::vector<std::vector<Grid::Status>>(size, std::vector<Grid::Status>(size, CAN_CROSS))), window(&w){
     int Y = window->getSize().y;
     int X = window->getSize().x;
     int y_size = Y/size;
