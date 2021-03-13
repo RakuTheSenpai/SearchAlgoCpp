@@ -7,12 +7,11 @@ void change_status(sf::Event, Grid::Status&, const sf::RenderWindow&, Grid&grid)
 void change_grid_status(Grid::Status status, const sf::RenderWindow &window, Grid&grid);
 
 int main(){
-    int width = 800, height = 600, size = 20;
+    int width = 800, height = 600, size = 50;
     bool is_pressed = false;
     sf::RenderWindow window(sf::VideoMode(width, height), "Search Algorithm");
     Grid grid(size, window);
     Grid::Status status = Grid::Status::BLOCKED;
-    //Probably can be refactored
     while(window.isOpen()){
         sf::Event event;
         while(window.pollEvent(event)){

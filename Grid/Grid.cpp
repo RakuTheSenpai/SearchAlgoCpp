@@ -32,10 +32,12 @@ void Grid::change_color(Grid::Coord coords, Grid::Status value){
         case Grid::Status::NOT_REACHEABLE:
             _box_grid[coords.y][coords.x].setFillColor(sf::Color::Red);
             break;
+        case Grid::Status::PATH:
+            _box_grid[coords.y][coords.x].setFillColor(sf::Color::Green);
+            break;
     }
 }
 void Grid::set_value(Grid::Coord coords, Grid::Status value){
-    if(coords == start || coords == goal) return;
     change_color(coords, value);
     _grid[coords.y][coords.x] = value;
 }

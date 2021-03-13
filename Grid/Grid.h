@@ -19,7 +19,8 @@ class Grid{
             VISITED,
             IN_QUEUE,
             GOAL,
-            NOT_REACHEABLE  
+            NOT_REACHEABLE,
+            PATH 
         };
         Grid(unsigned, sf::RenderWindow&);
         void set_coordinates_to_value(Grid::Coord, Grid::Status);
