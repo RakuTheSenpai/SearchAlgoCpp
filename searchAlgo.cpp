@@ -50,15 +50,22 @@ void change_status(sf::Event event, Grid::Status &status, const sf::RenderWindow
         break;
     case sf::Keyboard::E:
         change_grid_status(Grid::Status::START, window, grid);
+        grid.clear();
         break;
     case sf::Keyboard::R:
         change_grid_status(Grid::Status::GOAL, window, grid);
+        grid.clear();
         break;
     case sf::Keyboard::Num1:
+        grid.clear();
         Algo::bfs(grid);
         break;
     case sf::Keyboard::Num2:
+        grid.clear();
         Algo::dfs(grid);
+        break;
+    case sf::Keyboard::C:
+        grid.clear();
         break;
     default:
         break;
@@ -67,5 +74,5 @@ void change_status(sf::Event event, Grid::Status &status, const sf::RenderWindow
 void change_grid_status(Grid::Status status, const sf::RenderWindow &window, Grid&grid) {
     sf::Vector2i position = sf::Mouse::getPosition(window);
     Grid::Coord pos{position.x, position.y};
-    grid.set_coordinates_to_value(pos,status);
+    grid.set_coordinates_to_status(pos,status);
 }

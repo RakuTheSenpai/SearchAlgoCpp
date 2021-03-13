@@ -23,13 +23,14 @@ class Grid{
             PATH 
         };
         Grid(unsigned, sf::RenderWindow&);
-        void set_coordinates_to_value(Grid::Coord, Grid::Status);
-        Grid::Status get_grid_value(Grid::Coord);
-        bool checkBoundary(Grid::Coord);
+        void set_coordinates_to_status(Grid::Coord, Grid::Status);
+        Grid::Status get_status(Grid::Coord);
+        void set_status(Grid::Coord, Grid::Status);
+        bool check_boundary(Grid::Coord);
         void draw();
-        void set_value(Grid::Coord, Grid::Status);
         Grid::Coord get_start();
         Grid::Coord get_goal();
+        void clear();
     private:
         unsigned size;
         std::vector<std::vector<Grid::Status>>_grid;

@@ -10,6 +10,5 @@ class Algo{
         static void bfs(Grid&);
     private:
         static std::vector<Grid::Coord>offset;
-        void colorPath(Grid&);
 };
 #endif
