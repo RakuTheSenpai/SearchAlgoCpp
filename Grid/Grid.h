@@ -1,8 +1,8 @@
+#ifndef GRID_H
+#define GRID_H
 #include <iostream>
 #include <vector>
 #include <SFML/Graphics.hpp>
-#ifndef GRID_H
-#define GRID_H
 class Grid{
     public:
         struct Coord{
