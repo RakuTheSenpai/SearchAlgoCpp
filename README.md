@@ -13,7 +13,8 @@ Using the application is pretty simple, you just need to hover over the tiles an
 |W | Activates the wall "brush", now you can paint walls where you want them.|
 |E | Set Start position.|
 |R | Set Goal position.|
-|C | Clear the grid.|
+|C | Clears the grid of any previous performed algorithms.|
+|D | Clears the grid along with walls.|
 |1 | Perform BFS on Grid.|
 |2 | Perform DFS on Grid.|
 
