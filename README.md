@@ -1,5 +1,5 @@
 # SearchAlgoCpp
-A small project about search algorithms and their visual representation in C++.
+A small project about search algorithms and their visual representation.
 
 ## Building
 You can use and edit the provided make file to suit your needs. Personally I use Linux and the g++ compiler, so that's how it is configured.
