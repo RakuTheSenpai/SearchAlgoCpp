@@ -96,11 +96,11 @@ Grid::Coord Grid::get_goal(){
     return goal;
 }
 
-void Grid::clear(){
+void Grid::clear(bool walls){
     for(int row = 0; row < size; ++row){
         for(int col = 0; col < size; ++col){
             Grid::Coord coords{col, row};
-            if(get_status(coords)!= Grid::Status::BLOCKED){
+            if(walls || get_status(coords)!= Grid::Status::BLOCKED){
                 set_status(coords, Grid::Status::CAN_CROSS);
             }
         }
