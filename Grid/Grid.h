@@ -30,7 +30,7 @@ class Grid{
         void draw();
         Grid::Coord get_start();
         Grid::Coord get_goal();
-        void clear();
+        void clear(bool = false);
     private:
         unsigned size;
         std::vector<std::vector<Grid::Status>>_grid;
