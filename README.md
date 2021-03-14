@@ -21,8 +21,6 @@ Using the application is pretty simple, you just need to hover over the tiles an
 ## Examples (Coming Soon)
 
 ## Todo
-* Recalculate on goal or start coordinates reposition. 
 * Generate walls randomly.
 * Expand or substract the number of tiles.
-* Clear walls on clear (The C Hotkey).
 * Add A*.
