@@ -18,6 +18,15 @@ Using the application is pretty simple, you just need to hover over the tiles an
 |1 | Perform BFS on Grid.|
 |2 | Perform DFS on Grid.|
 
+## Color Code
+|Color | Meaning |
+|Yellow|Start/Completed path|
+|Green|Goal|
+|Blue|Visited|
+|Magenta|In queue/stack|
+|Black|Wall|
+|White|Empty space|
+
 ## Examples
 ### W
 ![W](https://github.com/RakuTheSenpai/SearchAlgoCpp/blob/main/Examples/w.gif)
