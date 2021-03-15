@@ -19,7 +19,31 @@ Using the application is pretty simple, you just need to hover over the tiles an
 |2 | Perform DFS on Grid.|
 
 ## Examples
+### W
 ![W](https://github.com/RakuTheSenpai/SearchAlgoCpp/blob/main/Examples/w.gif)
+
+### Q
+![Q](https://github.com/RakuTheSenpai/SearchAlgoCpp/blob/main/Examples/q.gif)
+
+### E
+![E](https://github.com/RakuTheSenpai/SearchAlgoCpp/blob/main/Examples/e.gif)
+
+### R
+![R](https://github.com/RakuTheSenpai/SearchAlgoCpp/blob/main/Examples/r.gif)
+
+### C
+![C](https://github.com/RakuTheSenpai/SearchAlgoCpp/blob/main/Examples/c.gif)
+
+### D
+![D](https://github.com/RakuTheSenpai/SearchAlgoCpp/blob/main/Examples/d.gif)
+
+### 1
+![1](https://github.com/RakuTheSenpai/SearchAlgoCpp/blob/main/Examples/1.gif)
+
+### 2
+![2](https://github.com/RakuTheSenpai/SearchAlgoCpp/blob/main/Examples/2.gif)
+
+
 ## Todo
 * Generate walls randomly.
 * Expand or substract the number of tiles.
