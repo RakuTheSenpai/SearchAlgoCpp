@@ -18,8 +18,8 @@ Using the application is pretty simple, you just need to hover over the tiles an
 |1 | Perform BFS on Grid.|
 |2 | Perform DFS on Grid.|
 
-## Examples (Coming Soon)
-
+## Examples
+![W](https://github.com/RakuTheSenpai/SearchAlgoCpp/blob/main/Examples/w.gif)
 ## Todo
 * Generate walls randomly.
 * Expand or substract the number of tiles.
