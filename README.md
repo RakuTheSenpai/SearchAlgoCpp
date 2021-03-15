@@ -20,6 +20,7 @@ Using the application is pretty simple, you just need to hover over the tiles an
 
 ## Color Code
 |Color | Meaning |
+|------|---------|
 |Yellow|Start/Completed path|
 |Green|Goal|
 |Blue|Visited|
