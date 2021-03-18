@@ -21,8 +21,8 @@ Using the application is pretty simple, you just need to hover over the tiles an
 ## Color Code
 |Color | Meaning |
 |------|---------|
-|Yellow|Start|
-|Green|Goal/Completed path|
+|Yellow|Start/Completed path|
+|Green|Goal|
 |Blue|Visited|
 |Magenta|In queue/stack|
 |Black|Wall|
