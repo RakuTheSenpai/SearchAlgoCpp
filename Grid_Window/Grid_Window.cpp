@@ -25,7 +25,6 @@ void Grid_Window::display(){
            change_grid_status(status);
         }
         grid->draw();
-        window->display();
     }
 }
 
@@ -74,6 +73,10 @@ void Grid_Window::change_status(sf::Event event){
         active = Algo_Status::NONE;
         grid->clear(true);
         break;
+    case sf::Keyboard::T:{
+        grid->clear(true);
+        grid->generate_maze(1,1,size, size);
+    }
     default:
         break;
     } 

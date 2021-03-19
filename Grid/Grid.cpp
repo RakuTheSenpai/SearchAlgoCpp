@@ -36,7 +36,9 @@ void Grid::change_color(Grid::Coord coords, Grid::Status value){
     }
 }
 void Grid::set_status(Grid::Coord coords, Grid::Status value){
-    change_color(coords, value);
+    if(!check_boundary(coords)) throw Grid_Out_Of_Bounds{};
+    //Dont change start color to avoid confusion
+    if((coords == start && value!=Grid::Status::VISITED)|| coords != start)change_color(coords, value);
     if(value == Grid::Status::START){
         start = coords;
     }else if(value == Grid::Status::GOAL){
@@ -58,13 +60,14 @@ void Grid::draw(){
             window->draw(box);
         }
     }
+    window->display();
 }
 
 Grid::Status Grid::get_status(Grid::Coord coords){
     return _grid[coords.y][coords.x];
 }
 
-Grid::Grid(unsigned s, sf::RenderWindow &w):size{s},_grid(std::vector<std::vector<Grid::Status>>(size, std::vector<Grid::Status>(size, CAN_CROSS))), window(&w){
+Grid::Grid(unsigned s, sf::RenderWindow &w):size{s},_grid(std::vector<std::vector<Grid::Status>>(size, std::vector<Grid::Status>(size, CAN_CROSS))), window(&w), mt(rd()){
     int Y = window->getSize().y;
     int X = window->getSize().x;
     int y_size = Y/size;
@@ -86,6 +89,7 @@ Grid::Grid(unsigned s, sf::RenderWindow &w):size{s},_grid(std::vector<std::vecto
     goal = Grid::Coord{n_size - 1, n_size - 1};
     set_status(start, Grid::Status::START);
     set_status(goal, Grid::Status::GOAL);
+    mt.seed(::time(NULL));
 }
 
 Grid::Coord Grid::get_start(){
@@ -107,4 +111,61 @@ void Grid::clear(bool walls){
     }
     set_status(get_start(), Grid::Status::START);
     set_status(get_goal(), Grid::Status::GOAL);
+}
+/*Reference: 
+http://weblog.jamisbuck.org/2011/1/12/maze-generation-recursive-division-algorithm
+https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_division_method
+https://stackoverflow.com/questions/59807560/maze-generator-using-recursive-division
+*/
+void Grid::generate_maze(int x, int y, int width, int height){
+    std::vector<std::vector<bool>>visited(size, std::vector<bool>(size, false));
+    generate_maze_helper(0, 0, width, height, true, visited);
+}
+
+int Grid::random_number(int number){
+    std::uniform_int_distribution<int> rnd(0, number);
+    return rnd(mt);
+}
+void Grid::generate_maze_helper(int x, int y, int width, int height, bool horizontal_orientation, std::vector<std::vector<bool>>&visited){
+    //Base case: Area is too small to proceed
+    if(width < 2 || height < 2){
+        return;
+    }
+    draw();
+    //This is basically because most algorithms assume a N*N matrix based on "lines" since this is "chunky" i.e it has cells it's technically 2 * N + 1 thus (x - 1)/2
+    int uwidth = (width - 1)/2;
+    int uheight = (height - 1)/2;
+    //Select random location for wall depending on orientation
+    int wX = x + (horizontal_orientation?0:2 * random_number(uwidth) + 1);
+    int wY = y + (horizontal_orientation?2 * random_number(uheight) + 1:0);
+    //Select random location for hole depending on orientation
+    int hX = wX + (horizontal_orientation?2 * random_number(uwidth):0);
+    int hY = wY + (horizontal_orientation?0:2 * random_number(uheight));
+    //Movement on either the X or Y axis
+    int dX = horizontal_orientation?1:0;
+    int dY = horizontal_orientation?0:1;
+
+    int goal = horizontal_orientation?width:height;
+
+    //Draw walls except on goal, start, hole or on a visited space (so we don't redraw over previous holes)
+    for(int i = 0; i < goal; ++i){
+        if(!visited[wX][wY] && (wX != hX || wY != hY) && (get_status(Grid::Coord{wX, wY})!= Grid::Status::START && get_status(Grid::Coord{wX, wY}) != Grid::Status::GOAL)) {
+            set_status(Grid::Coord{wX, wY}, Grid::Status::BLOCKED);
+        }
+        visited[wX][wY] = true;
+        wX += dX;
+        wY += dY;
+    }
+    draw();
+    //Keep dividing in current area
+    int nx = x, ny = y;
+    int w = horizontal_orientation?width:wX - x;
+    int h = horizontal_orientation?wY - y:height;
+    generate_maze_helper(nx, ny, w, h, !horizontal_orientation, visited);
+    //Divide the remaining area
+    nx = horizontal_orientation?x:wX + 1;
+    ny = horizontal_orientation?wY + 1: y;
+    w = horizontal_orientation?width:x + width - wX - 1;
+    h = horizontal_orientation?y + height - wY - 1:height;
+    generate_maze_helper(nx, ny, w, h, !horizontal_orientation, visited);
 }
