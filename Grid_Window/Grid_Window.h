@@ -24,7 +24,7 @@ class Grid_Window{
     bool is_pressed = false;
     Grid::Status status;
     sf::RenderWindow *window;
-    unsigned size = 20;
+    unsigned size = 50;
     Grid *grid;
     void change_status(sf::Event);
     void change_grid_status(Grid::Status);
