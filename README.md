@@ -13,6 +13,7 @@ Using the application is pretty simple, you just need to hover over the tiles an
 |W | Activates the wall "brush", now you can paint walls where you want them.|
 |E | Set Start position.|
 |R | Set Goal position.|
+|T | Generate random maze.|
 |C | Clears the grid of any previous performed algorithms.|
 |D | Clears the grid along with walls.|
 |1 | Perform BFS on Grid.|
@@ -41,6 +42,9 @@ Using the application is pretty simple, you just need to hover over the tiles an
 ### R
 ![R](https://github.com/RakuTheSenpai/SearchAlgoCpp/blob/main/Examples/r.gif)
 
+### T
+![T](https://github.com/RakuTheSenpai/SearchAlgoCpp/blob/main/Examples/t.gif)
+
 ### C
 ![C](https://github.com/RakuTheSenpai/SearchAlgoCpp/blob/main/Examples/c.gif)
 
@@ -55,6 +59,4 @@ Using the application is pretty simple, you just need to hover over the tiles an
 
 
 ## Todo
-* Generate walls randomly.
-* Expand or substract the number of tiles.
 * Add A*.
