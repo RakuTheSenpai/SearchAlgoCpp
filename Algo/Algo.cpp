@@ -72,3 +72,8 @@ void Algo::dfs(Grid &_grid){
     _grid.set_status(_grid.get_goal(),  Grid::Status::NOT_REACHEABLE);
     _grid.set_status(_grid.get_start(), Grid::Status::NOT_REACHEABLE);
 }
+
+void Algo::a_star(Grid &_grid){
+    std::priority_queue<std::pair<int, Grid::Coord>, std::vector<std::pair<int,Grid::Coord>>, std::greater<>>q;
+    q.push({0, _grid.get_start()});
+}

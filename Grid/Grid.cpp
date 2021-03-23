@@ -79,7 +79,7 @@ Grid::Grid(unsigned s, sf::RenderWindow &w):size{s},_grid(std::vector<std::vecto
             rectangle.setSize(sf::Vector2f(x_size, y_size));
             rectangle.setOutlineColor(sf::Color::Black);
             rectangle.setOutlineThickness(1);
-            rectangle.setPosition(x, y);;
+            rectangle.setPosition(x, y);
             line.push_back(rectangle);
         }
         _box_grid.push_back(line);
