@@ -14,7 +14,7 @@ class Algo{
         static void a_star(Grid&);
     private:
         static std::vector<Grid::Coord>offset;
-        static void a_star_construct_path(std::unordered_map<Grid::Coord,Grid::Coord>&, Grid&, Grid::Coord);
+        static void construct_path(std::unordered_map<Grid::Coord,Grid::Coord>&, Grid&, Grid::Coord);
         static float d(Grid::Coord, Grid::Coord);
 };
 #endif
