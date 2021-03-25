@@ -18,6 +18,7 @@ Using the application is pretty simple, you just need to hover over the tiles an
 |D | Clears the grid along with walls.|
 |1 | Perform BFS on Grid.|
 |2 | Perform DFS on Grid.|
+|3| Perform A* on Grid. |
 
 ## Color Code
 |Color | Meaning |
@@ -57,6 +58,7 @@ Using the application is pretty simple, you just need to hover over the tiles an
 ### 2
 ![2](https://github.com/RakuTheSenpai/SearchAlgoCpp/blob/main/Examples/2.gif)
 
+### 3
+![3](https://github.com/RakuTheSenpai/SearchAlgoCpp/blob/main/Examples/3.gif)
 
-## Todo
-* Add A*.
+
