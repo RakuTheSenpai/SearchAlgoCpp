@@ -72,8 +72,56 @@ void Algo::dfs(Grid &_grid){
     _grid.set_status(_grid.get_goal(),  Grid::Status::NOT_REACHEABLE);
     _grid.set_status(_grid.get_start(), Grid::Status::NOT_REACHEABLE);
 }
-
+float Algo::d(Grid::Coord a, Grid::Coord b){
+    return std::sqrt(std::pow(b.x - a.x, 2) + std::pow(b.y - a.y, 2));
+}
+//Would be a good idea to refactor code to use this instead of storing all paths.
+void Algo::a_star_construct_path(std::unordered_map<Grid::Coord, Grid::Coord>&came_from, Grid&_grid, Grid::Coord current){
+    while(came_from.count(current)){
+        _grid.set_status(current, Grid::Status::PATH);
+        current = came_from[current];
+    }
+    _grid.set_status(_grid.get_start(), Grid::Status::START);
+}
 void Algo::a_star(Grid &_grid){
-    std::priority_queue<std::pair<int, Grid::Coord>, std::vector<std::pair<int,Grid::Coord>>, std::greater<>>q;
-    q.push({0, _grid.get_start()});
+    std::priority_queue<std::pair<float, Grid::Coord>, std::vector<std::pair<float,Grid::Coord>>, std::greater<>>q;
+    q.push({d(_grid.get_start(), _grid.get_goal()), _grid.get_start()});
+    std::unordered_map<Grid::Coord, Grid::Coord>came_from;
+    std::unordered_map<Grid::Coord, float>score;
+    std::set<Grid::Coord>open_set;
+    open_set.insert(_grid.get_start());
+    int count = 0;
+    while(!q.empty()){
+        auto top = q.top();
+        auto current = top.second;
+        q.pop();
+        _grid.set_status(current, Grid::Status::VISITED);
+        open_set.erase(current);
+        if(current == _grid.get_goal()){
+            a_star_construct_path(came_from, _grid, current);
+            return;
+        }
+        for(int i = 0; i < 8; ++i){
+            int x = current.x + offset[i].x;
+            int y = current.y + offset[i].y;
+            Grid::Coord neighbor{x, y};
+            float tentative_score = score[current] + d(current, neighbor);
+            if(_grid.check_boundary(neighbor) &&
+            ((_grid.get_status(neighbor)==Grid::Status::CAN_CROSS  || _grid.get_status(Grid::Coord{x,y})==Grid::Status::GOAL)&& 
+                (score.count(neighbor) == 0 || tentative_score < score[neighbor]))){
+                 _grid.set_status(Grid::Coord{x, y}, Grid::Status::IN_QUEUE);
+                 came_from[neighbor] = current;
+                 score[neighbor] = tentative_score;
+                 float fscore = score[neighbor] + d(neighbor, _grid.get_goal());
+                 if(open_set.count(neighbor) == 0){
+                    _grid.set_status(Grid::Coord{x, y}, Grid::Status::IN_QUEUE);
+                    q.push({fscore, neighbor});
+                    open_set.insert(neighbor);
+                 }
+            }
+        }
+        _grid.draw();
+    }
+    _grid.set_status(_grid.get_goal(),  Grid::Status::NOT_REACHEABLE);
+    _grid.set_status(_grid.get_start(), Grid::Status::NOT_REACHEABLE);
 }

@@ -44,6 +44,8 @@ void Grid_Window::change_status(sf::Event event){
             Algo::bfs(*grid);
         }else if(active == Algo_Status::DFS){
             Algo::dfs(*grid);
+        }else if(active == Algo_Status::A_STAR){
+            Algo::a_star(*grid);
         }
         break;
     case sf::Keyboard::R:
@@ -53,6 +55,8 @@ void Grid_Window::change_status(sf::Event event){
             Algo::bfs(*grid);
         }else if(active == Algo_Status::DFS){
             Algo::dfs(*grid);
+        }else if(active == Algo_Status::A_STAR){
+            Algo::a_star(*grid);
         }
         break;
     case sf::Keyboard::Num1:
@@ -64,6 +68,11 @@ void Grid_Window::change_status(sf::Event event){
         active = Algo_Status::DFS;
         grid->clear();
         Algo::dfs(*grid);
+        break;
+    case sf::Keyboard::Num3:
+        active = Algo_Status::A_STAR;
+        grid->clear();
+        Algo::a_star(*grid);
         break;
     case sf::Keyboard::C:
         active = Algo_Status::NONE;

@@ -16,7 +16,8 @@ class Grid_Window{
     enum Algo_Status{
         NONE,
         BFS,
-        DFS
+        DFS,
+        A_STAR
     };
     Algo_Status active = Algo_Status::NONE;
     unsigned width;

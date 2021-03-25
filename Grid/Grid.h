@@ -10,11 +10,14 @@ class Grid{
         struct Coord{
             int x;
             int y;
-            bool operator==(const Coord &b){
+            bool operator==(const Coord &b) const{
                 return (this->x == b.x) && (this->y == b.y);
             }
-            bool operator!=(const Coord &b){
+            bool operator!=(const Coord &b) const{
                 return !(*this == b);
+            }
+            bool operator<(const Coord&b) const{
+                return this->x < b.x || this->y < b.y;
             }
         };
         enum Status{
@@ -52,4 +55,14 @@ class Grid{
         void generate_maze_helper(int, int, int, int, bool, std::vector<std::vector<bool>>&);
         int random_number(int);
 };
+//For hashing keys on hash tables
+namespace std{
+    template<>
+    struct hash<Grid::Coord>{
+        std::size_t operator()(const Grid::Coord &coord) const{
+            using std::size_t;
+            return (hash<int>()(coord.x) ^ (hash<int>()(coord.y << 1)) >> 1);
+        }
+    };
+}
 #endif
